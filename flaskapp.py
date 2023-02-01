@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, send_from_directory
+from flask import Flask, request, redirect, render_template, send_from_directory, url_for
 import hashlib, sqlite3, os
 from werkzeug.utils import secure_filename
 
@@ -62,17 +62,16 @@ def registration_submit():
             filename = secure_filename(file_form.filename)
             cnt=len(file_form.read().split())
             file_form.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            filename=None
+            cnt=0
         cur.execute("""INSERT INTO natlpark VALUES (?,?,?,?,?,?,?)""",(firstname,lastname,email,username,hashed_password,filename,cnt))
         conn.commit()
     except Exception as e:
         print(e)
         return "Error inserting data into database: {}",format(e)
     # Store the data in database or process it as desired.
-    return redirect('/success') #redirect to successful registration page
-
-@app.route('/success')
-def success():
-    return 'Successful registration!'
+    return redirect(url_for("login_submit"),code=307)
 
 if __name__ == '__main__':
     app.run()
