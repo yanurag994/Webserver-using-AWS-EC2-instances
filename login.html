@@ -1,16 +1,51 @@
 <html>
   <head>
     <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: blue;
+            margin-top: 50px;
+        }
+        form {
+            margin-top: 50px;
+            text-align: left;
+            display: inline-block;
+            padding: 30px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            margin-top: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            border: none;
+        }
+    </style>
   </head>
   <body>
     <h1>Login</h1>
     <form action="{{ url_for('login_submit') }}" method="POST">
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username"><br><br>
-
+      <input type="text" id="username" name="username"><br>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password"><br><br>
-
+      <input type="password" id="password" name="password"><br>
+    
       <input type="submit" value="Submit">
     </form>
   </body>
